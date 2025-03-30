@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../../../core/providers/auth_provider.dart';
-import '../../../core/providers/theme_provider.dart';
 import '../../../core/components/app_drawer.dart';
 
 class HomePage extends StatefulWidget {

@@ -9,17 +9,16 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: primaryPurple,
       secondary: secondaryPurple,
       tertiary: accentBlue,
       surface: Colors.white,
-      background: Colors.grey[50]!,
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onTertiary: Colors.white,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: primaryPurple,
       foregroundColor: Colors.white,
       elevation: 0,
@@ -36,7 +35,7 @@ class AppTheme {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: primaryPurple.withOpacity(0.3)),
+        borderSide: BorderSide(color: primaryPurple.withValues(alpha: 0.3)),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -62,12 +61,11 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    colorScheme: ColorScheme.dark(
+    colorScheme: const ColorScheme.dark(
       primary: primaryPurple,
       secondary: secondaryPurple,
       tertiary: accentBlue,
-      surface: const Color(0xFF1E1E1E),
-      background: const Color(0xFF121212),
+      surface: Color(0xFF1E1E1E),
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onTertiary: Colors.white,
@@ -89,7 +87,7 @@ class AppTheme {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: primaryPurple.withOpacity(0.3)),
+        borderSide: BorderSide(color: primaryPurple.withValues(alpha: 0.3)),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

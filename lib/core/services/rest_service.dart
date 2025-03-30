@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../models/api_response.dart';
+import 'dart:async';
 
 class RestService {
   final String baseUrl;
@@ -36,12 +37,35 @@ class RestService {
         headers['Authorization'] = 'Bearer $token';
       }
 
-      final response = await http.get(
+      final response = await http
+          .get(
         Uri.parse('$baseUrl/$endpoint'),
         headers: headers,
+      )
+          .timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException('Request timed out');
+        },
       );
 
       return _handleResponse<T>(response, fromJson);
+    } on TimeoutException catch (e) {
+      return ApiResponse(
+        version: '1.0.0',
+        statusCode: 408,
+        isError: true,
+        message: 'Request timed out',
+        responseException: ApiError(exceptionMessage: e.toString()),
+      );
+    } on http.ClientException catch (e) {
+      return ApiResponse(
+        version: '1.0.0',
+        statusCode: 503,
+        isError: true,
+        message: 'Network error - server may be offline',
+        responseException: ApiError(exceptionMessage: e.toString()),
+      );
     } catch (e) {
       return ApiResponse(
         version: '1.0.0',
@@ -66,13 +90,36 @@ class RestService {
         headers['Authorization'] = 'Bearer $token';
       }
 
-      final response = await http.post(
+      final response = await http
+          .post(
         Uri.parse('$baseUrl/$endpoint'),
         headers: headers,
         body: json.encode(body),
+      )
+          .timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException('Request timed out');
+        },
       );
 
       return _handleResponse<T>(response, fromJson);
+    } on TimeoutException catch (e) {
+      return ApiResponse(
+        version: '1.0.0',
+        statusCode: 408,
+        isError: true,
+        message: 'Request timed out',
+        responseException: ApiError(exceptionMessage: e.toString()),
+      );
+    } on http.ClientException catch (e) {
+      return ApiResponse(
+        version: '1.0.0',
+        statusCode: 503,
+        isError: true,
+        message: 'Network error - server may be offline',
+        responseException: ApiError(exceptionMessage: e.toString()),
+      );
     } catch (e) {
       return ApiResponse(
         version: '1.0.0',
@@ -97,13 +144,36 @@ class RestService {
         headers['Authorization'] = 'Bearer $token';
       }
 
-      final response = await http.put(
+      final response = await http
+          .put(
         Uri.parse('$baseUrl/$endpoint'),
         headers: headers,
         body: json.encode(body),
+      )
+          .timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException('Request timed out');
+        },
       );
 
       return _handleResponse<T>(response, fromJson);
+    } on TimeoutException catch (e) {
+      return ApiResponse(
+        version: '1.0.0',
+        statusCode: 408,
+        isError: true,
+        message: 'Request timed out',
+        responseException: ApiError(exceptionMessage: e.toString()),
+      );
+    } on http.ClientException catch (e) {
+      return ApiResponse(
+        version: '1.0.0',
+        statusCode: 503,
+        isError: true,
+        message: 'Network error - server may be offline',
+        responseException: ApiError(exceptionMessage: e.toString()),
+      );
     } catch (e) {
       return ApiResponse(
         version: '1.0.0',
@@ -127,12 +197,35 @@ class RestService {
         headers['Authorization'] = 'Bearer $token';
       }
 
-      final response = await http.delete(
+      final response = await http
+          .delete(
         Uri.parse('$baseUrl/$endpoint'),
         headers: headers,
+      )
+          .timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw TimeoutException('Request timed out');
+        },
       );
 
       return _handleResponse<T>(response, fromJson);
+    } on TimeoutException catch (e) {
+      return ApiResponse(
+        version: '1.0.0',
+        statusCode: 408,
+        isError: true,
+        message: 'Request timed out',
+        responseException: ApiError(exceptionMessage: e.toString()),
+      );
+    } on http.ClientException catch (e) {
+      return ApiResponse(
+        version: '1.0.0',
+        statusCode: 503,
+        isError: true,
+        message: 'Network error - server may be offline',
+        responseException: ApiError(exceptionMessage: e.toString()),
+      );
     } catch (e) {
       return ApiResponse(
         version: '1.0.0',
